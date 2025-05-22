@@ -3,6 +3,8 @@
 # --- Variables ---
 # The name of the binary to be built
 BINARY_NAME := pg-agent
+# The name of go package
+PACKAGE_NAME := powerguardian
 
 # Target Operating System (e.g., linux, windows, darwin)
 TARGET_OS := linux
@@ -27,7 +29,7 @@ all: build
 .PHONY: build
 build:
 	@echo "Building $(BINARY_NAME) for $(TARGET_OS)/$(TARGET_ARCH) (ARMv$(TARGET_ARM_VERSION))..."
-	@GOOS=$(TARGET_OS) GOARCH=$(TARGET_ARCH) GOARM=$(TARGET_ARM_VERSION) $(GO) build $(BUILD_FLAGS) -o $(BINARY_NAME) .
+	@GOOS=$(TARGET_OS) GOARCH=$(TARGET_ARCH) GOARM=$(TARGET_ARM_VERSION) $(GO) build $(BUILD_FLAGS) -o $(BINARY_NAME) ./cmd/$(PACKAGE_NAME)
 	@echo "$(BINARY_NAME) built successfully for $(TARGET_OS)/$(TARGET_ARCH) (ARMv$(TARGET_ARM_VERSION))."
 
 # Clean up build artifacts
